@@ -1,0 +1,54 @@
+<section class="signIn">
+    <div class="signLeft">
+        <div class="div-center">
+            <p class="head">Basic <br>Authentication <br>and <br>User Experience</p>
+            <p class="text">Not yet a member ? </p>
+            <button class="btn signUpBtn genBtn" (click)="moveToSignUp()">Sign Up
+            </button>
+        </div>
+    </div>
+
+    <div class="signright">
+        <nav>
+            <li><a (click)="moveToHome()">Home</a></li>
+            <li><a (click)="moveToSignUp()">Sign Up</a></li>
+        </nav>
+
+        <div *ngIf="alrt" class="alert alert-success" role="alert">
+            Signin was Successful!
+        </div>
+
+        <form [formGroup]="signInForm" (ngSubmit)="signIn()">
+
+
+            <div class="form-group" [formGroup]="signInForm">
+                <label class="custlabel" for="email">Email</label>
+                <input type="email" class="form-control custInput" [formControl]="email" required>
+                <span class="text-danger" *ngIf="email.invalid && email.touched">Not a valid email</span>
+            </div>
+
+
+            <div class="form-group" [formGroup]="signInForm">
+                <div class="grppasswrd">
+                    <label class="custlabel" for="password">Password</label>
+                    <p class="forgtpass" (click)="moveToReset()">Forgot Password ?</p>
+                </div>
+                <input type="password" class="form-control custInput" [formControl]="password" required>
+                <div class="text-danger" *ngIf="password.invalid && password.touched">
+                    <span *ngIf="password.errors.required">Password is required</span>
+                    <span *ngIf="password.errors.pattern && password.errors.minlength">Password must contain letters & numbers, Minimum password length is six characters</span>
+                </div>
+                <div class="checkpass custom-control custom-checkbox my-1 mr-sm-2">
+                    <input type="checkbox" class="custom-control-input" id="customControlInline">
+                    <label class=" custom-control-label" for="customControlInline">Remember me</label>
+                </div>
+            </div>
+
+
+
+            <button class="btn genBtn signInbtn" type="submit" [disabled]="!signInForm.valid">Sign In</button>
+
+        </form>
+    </div>
+
+</section>
